@@ -1,74 +1,42 @@
 export default function Vision() {
   return (
-    <section id="vision" className="py-28 px-6 lg:px-8 relative overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-[#D42B2B]/[0.05] rounded-full blur-[140px]" />
-      </div>
-
-      <div className="max-w-7xl mx-auto relative z-10">
-        {/* Header */}
-        <div className="max-w-3xl mb-20">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/25 mb-5">
-            The destination
-          </p>
-          <h2 className="text-[clamp(2.5rem,5vw,4rem)] font-bold text-white leading-tight tracking-tight mb-6">
-            The AI Operating System
-            <br />
+    <section id="vision" className="py-24 px-6 bg-[#fafafa]">
+      <div className="max-w-[1200px] mx-auto">
+        <div className="max-w-2xl mb-16">
+          <p className="text-xs font-medium text-[#111]/30 uppercase tracking-widest mb-4">The destination</p>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight text-[#111] mb-5">
+            The AI Operating System<br />
             <span className="gradient-text">for your company</span>
           </h2>
-          <p className="text-white/40 text-xl leading-relaxed max-w-2xl font-light">
-            Every meeting recorded. Every ticket tracked. Every customer
-            interaction captured and legible to an intelligence layer that learns.
-            A company that runs as a closed loop.
+          <p className="text-[#111]/45 text-lg leading-relaxed">
+            Every meeting recorded. Every ticket tracked. Every customer interaction legible
+            to an intelligence layer that learns. A company that runs as a closed loop.
           </p>
         </div>
 
-        {/* Three cards */}
-        <div className="grid md:grid-cols-3 gap-5 mb-8">
+        <div className="grid md:grid-cols-3 gap-3 mb-4">
           {[
-            {
-              icon: "📥",
-              title: "Everything Captured",
-              body: "Every Slack message, meeting, support ticket, GitHub commit, and customer call — automatically captured and structured.",
-            },
-            {
-              icon: "🧠",
-              title: "One Intelligence Layer",
-              body: "A unified context layer connects all sources. No siloed tools. No brittle glue code. No knowledge that only lives in someone's head.",
-            },
-            {
-              icon: "🔄",
-              title: "Closed-Loop Improvement",
-              body: "Sprint velocity, customer satisfaction, delivery quality — all feed back and improve the next cycle automatically.",
-            },
+            { icon: "📥", title: "Everything Captured", body: "Every Slack message, meeting, ticket, commit, and customer call — automatically captured and structured." },
+            { icon: "🧠", title: "One Intelligence Layer", body: "A unified context layer. No siloed tools, no brittle glue code, no knowledge living only in someone's head." },
+            { icon: "🔄", title: "Closed-Loop Improvement", body: "Sprint velocity, satisfaction, delivery quality — all feed back and improve the next cycle automatically." },
           ].map((item) => (
-            <div
-              key={item.title}
-              className="rounded-3xl border border-white/[0.07] bg-white/[0.025] p-9 hover:border-[#D42B2B]/20 hover:bg-[#D42B2B]/[0.03] transition-all duration-300"
-            >
-              <div className="text-3xl mb-6">{item.icon}</div>
-              <h3 className="text-white font-bold text-lg mb-3">{item.title}</h3>
-              <p className="text-white/35 text-sm leading-relaxed">{item.body}</p>
+            <div key={item.title}
+              className="rounded-xl border border-black/[0.07] bg-white p-7 hover:shadow-md hover:shadow-black/[0.05] transition-all duration-200">
+              <div className="text-2xl mb-4">{item.icon}</div>
+              <h3 className="text-[#111] font-semibold mb-2 tracking-tight">{item.title}</h3>
+              <p className="text-[#111]/40 text-sm leading-relaxed">{item.body}</p>
             </div>
           ))}
         </div>
 
-        {/* Tools strip */}
-        <div className="rounded-3xl border border-white/[0.06] bg-white/[0.015] p-8">
-          <p className="text-center text-white/25 text-xs font-bold uppercase tracking-[0.2em] mb-6">
-            We integrate your entire stack
+        <div className="rounded-xl border border-black/[0.07] bg-white p-6 mt-3">
+          <p className="text-center text-[#111]/30 text-[11px] font-medium uppercase tracking-widest mb-5">
+            Integrates with your entire stack
           </p>
-          <div className="flex flex-wrap justify-center gap-2.5">
-            {[
-              "Slack", "Linear", "GitHub", "Notion", "Jira",
-              "Confluence", "HubSpot", "Zendesk", "Loom", "Zoom",
-              "Google Workspace", "& more",
-            ].map((tool) => (
-              <span
-                key={tool}
-                className="px-3.5 py-1.5 rounded-xl bg-white/[0.04] border border-white/[0.06] text-white/35 text-xs font-medium"
-              >
-                {tool}
+          <div className="flex flex-wrap justify-center gap-2">
+            {["Slack", "Linear", "GitHub", "Notion", "Jira", "Confluence", "HubSpot", "Zendesk", "Loom", "Zoom", "Google Workspace", "& more"].map((t) => (
+              <span key={t} className="px-3 py-1 rounded-md bg-[#f5f5f5] border border-black/[0.06] text-[#111]/40 text-xs">
+                {t}
               </span>
             ))}
           </div>

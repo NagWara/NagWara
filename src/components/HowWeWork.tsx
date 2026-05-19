@@ -1,78 +1,52 @@
 const steps = [
-  {
-    num: "01",
-    title: "Deep Diagnosis",
-    body: "We map every process, workflow, and knowledge dependency in your company. We find where the real work happens — and where it gets stuck.",
-  },
-  {
-    num: "02",
-    title: "Architecture Design",
-    body: "We design your AI-first operating model — a full redesign of how work flows through your organization, not a chatbot strategy.",
-  },
-  {
-    num: "03",
-    title: "Build the Brain",
-    body: "We extract and structure your company's domain knowledge into an executable layer that AI agents can actually use.",
-  },
-  {
-    num: "04",
-    title: "Deploy & Automate",
-    body: "We build and ship the AI pipelines, agents, and integrations that replace manual processes — with human oversight where it matters.",
-  },
-  {
-    num: "05",
-    title: "Close the Loop",
-    body: "We connect your intelligence layer so every interaction, outcome, and metric feeds back into improvement. Your company starts learning.",
-  },
+  { num: "01", title: "Deep Diagnosis", body: "We map every process, workflow, and knowledge dependency in your company — finding where the real work happens and where it gets stuck." },
+  { num: "02", title: "Architecture Design", body: "We design your AI-first operating model: a full redesign of how work flows through your organization, not a chatbot strategy." },
+  { num: "03", title: "Build the Brain", body: "We extract and structure your company's domain knowledge into an executable layer that AI agents can actually use." },
+  { num: "04", title: "Deploy & Automate", body: "We build and ship the AI pipelines, agents, and integrations that replace manual processes — with human oversight where it matters." },
+  { num: "05", title: "Close the Loop", body: "We connect your intelligence layer so every interaction, outcome, and metric feeds back into improvement. Your company starts learning." },
 ];
 
 export default function HowWeWork() {
   return (
-    <section id="how-we-work" className="py-28 px-6 lg:px-8 border-y border-white/[0.06] bg-white/[0.01]">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-20 items-start">
-          {/* Left */}
-          <div className="lg:sticky lg:top-28">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/25 mb-5">
-              Our process
-            </p>
-            <h2 className="text-[clamp(2.5rem,5vw,4rem)] font-bold text-white leading-tight tracking-tight mb-8">
-              From the heart,
-              <br />
-              not the surface
+    <section id="how-we-work" className="py-24 px-6 bg-white">
+      <div className="max-w-[1200px] mx-auto">
+        <div className="divider mb-16" />
+
+        <div className="grid lg:grid-cols-[1fr_1.2fr] gap-16 items-start">
+          <div className="lg:sticky lg:top-24">
+            <p className="text-xs font-medium text-[#111]/30 uppercase tracking-widest mb-4">Process</p>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight text-[#111] mb-6">
+              From the heart,<br />not the surface
             </h2>
-            <p className="text-white/40 leading-relaxed text-lg mb-10 max-w-md">
-              Most consultancies bolt tools onto existing processes. We redesign
-              the processes themselves. The result isn&apos;t a company that uses AI
-              — it&apos;s a company that runs on AI.
+            <p className="text-[#111]/45 leading-relaxed text-base mb-8 max-w-sm">
+              Most consultancies bolt tools onto existing processes. We redesign the processes themselves — the result isn&apos;t a company that uses AI, it&apos;s a company that runs on AI.
             </p>
-            <blockquote className="p-6 rounded-2xl border border-[#D42B2B]/15 bg-[#D42B2B]/[0.04]">
-              <p className="text-[#E84444]/70 text-[15px] leading-relaxed italic">
-                &ldquo;Teams that build a true AI operating layer cut sprint time in
-                half and ship twice as much. The bottleneck was never the tools
-                — it was the missing intelligence layer.&rdquo;
+            <blockquote className="pl-4 border-l-2 border-[#D42B2B]/25">
+              <p className="text-[#111]/40 text-sm leading-relaxed italic">
+                &ldquo;Teams that build a true AI operating layer cut sprint time in half and ship twice as much. The bottleneck was never the tools.&rdquo;
               </p>
             </blockquote>
           </div>
 
-          {/* Right — Steps */}
-          <div className="flex flex-col">
+          <div>
             {steps.map((step, i) => (
-              <div key={step.num} className="flex gap-6 pb-10 relative">
+              <div key={step.num} className="flex gap-5 pb-8 relative group">
                 {i < steps.length - 1 && (
-                  <div className="absolute left-[22px] top-12 bottom-0 w-px bg-gradient-to-b from-[#D42B2B]/20 to-transparent" />
+                  <div className="absolute left-[17px] top-10 bottom-0 w-px bg-gradient-to-b from-black/[0.08] to-transparent" />
                 )}
-                <div className="flex-shrink-0 w-11 h-11 rounded-full border border-[#D42B2B]/20 bg-[#D42B2B]/[0.05] flex items-center justify-center text-xs font-mono font-bold text-[#D42B2B]/40 z-10">
+                <div className="flex-shrink-0 w-9 h-9 rounded-full border border-black/[0.1] bg-[#f7f7f7] flex items-center justify-center text-[11px] font-mono text-[#111]/30 z-10 group-hover:border-[#D42B2B]/30 group-hover:text-[#D42B2B]/60 group-hover:bg-[#D42B2B]/[0.04] transition-all">
                   {step.num}
                 </div>
-                <div className="pt-2">
-                  <h3 className="text-white font-bold mb-2 text-[17px]">{step.title}</h3>
-                  <p className="text-white/35 text-sm leading-relaxed">{step.body}</p>
+                <div className="pt-1.5">
+                  <h3 className="text-[#111] font-semibold mb-1.5 tracking-tight">{step.title}</h3>
+                  <p className="text-[#111]/40 text-sm leading-relaxed">{step.body}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
+
+        <div className="divider mt-16" />
       </div>
     </section>
   );

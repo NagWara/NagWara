@@ -16,81 +16,60 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 40);
+    const handler = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handler);
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-[#050508]/85 backdrop-blur-2xl border-b border-white/[0.06]"
-          : "bg-transparent"
-      }`}
-    >
-      <nav className="max-w-7xl mx-auto px-6 lg:px-8 h-[68px] flex items-center justify-between">
-        {/* Logo */}
-        <a href="#" className="flex items-center gap-3 group">
-          <NagWaraIcon className="h-7 w-auto text-[#D42B2B]" />
+    <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+      scrolled ? "bg-white/90 backdrop-blur-xl border-b border-black/[0.06] shadow-sm" : ""
+    }`}>
+      <nav className="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between gap-8">
+        <a href="#" className="flex items-center gap-2.5 flex-shrink-0">
+          <NagWaraIcon className="h-[26px] w-auto text-[#D42B2B]" />
           <div className="flex flex-col leading-none">
-            <span className="font-bold text-white text-[17px] tracking-[-0.01em]">
-              NagWara
-            </span>
-            <span className="text-[#D42B2B] text-[8.5px] font-bold tracking-[0.2em] uppercase mt-0.5">
-              AI‑First Business
-            </span>
+            <span className="font-semibold text-[#111] text-[15px] tracking-tight">NagWara</span>
+            <span className="text-[#D42B2B] text-[7.5px] font-bold tracking-[0.2em] uppercase mt-[2px]">AI‑First Business</span>
           </div>
         </a>
 
-        {/* Desktop links */}
-        <ul className="hidden md:flex items-center gap-1">
+        <ul className="hidden md:flex items-center gap-0.5 flex-1 justify-center">
           {links.map((l) => (
             <li key={l.href}>
-              <a
-                href={l.href}
-                className="px-4 py-2 text-sm text-white/50 hover:text-white rounded-lg hover:bg-white/[0.05] transition-all"
-              >
+              <a href={l.href} className="px-3.5 py-1.5 text-sm text-[#111]/50 hover:text-[#111] rounded-md hover:bg-black/[0.04] transition-all">
                 {l.label}
               </a>
             </li>
           ))}
         </ul>
 
-        <a
-          href="#contact"
-          className="hidden md:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-[#D42B2B] hover:bg-[#E03535] text-white text-sm font-semibold transition-all shadow-lg shadow-[#D42B2B]/20"
-        >
-          Let's talk
-        </a>
+        <div className="hidden md:flex items-center gap-3 flex-shrink-0">
+          <a href="#contact" className="text-sm text-[#111]/45 hover:text-[#111] transition-colors">
+            Contact
+          </a>
+          <a href="#contact"
+            className="px-4 py-1.5 rounded-lg bg-[#111] hover:bg-[#333] text-white text-sm font-semibold transition-all">
+            Let&apos;s talk →
+          </a>
+        </div>
 
-        <button
-          className="md:hidden text-white/60 hover:text-white p-1"
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
-        >
-          {open ? <X size={22} /> : <Menu size={22} />}
+        <button className="md:hidden text-[#111]/50 hover:text-[#111]" onClick={() => setOpen(!open)}>
+          {open ? <X size={20} /> : <Menu size={20} />}
         </button>
       </nav>
 
       {open && (
-        <div className="md:hidden bg-[#050508]/98 backdrop-blur-2xl border-b border-white/[0.06] px-6 py-5 flex flex-col gap-1">
+        <div className="md:hidden bg-white border-b border-black/[0.06] px-6 py-4 flex flex-col gap-1">
           {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={() => setOpen(false)}
-              className="text-white/60 hover:text-white transition-colors py-2.5 text-sm"
-            >
+            <a key={l.href} href={l.href} onClick={() => setOpen(false)}
+              className="text-[#111]/55 hover:text-[#111] py-2.5 text-sm transition-colors">
               {l.label}
             </a>
           ))}
-          <a
-            href="#contact"
-            onClick={() => setOpen(false)}
-            className="mt-3 inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-[#D42B2B] text-white text-sm font-semibold"
-          >
-            Let's talk
+          <a href="#contact" onClick={() => setOpen(false)}
+            className="mt-3 flex items-center justify-center px-4 py-2 rounded-lg bg-[#111] text-white text-sm font-semibold">
+            Let&apos;s talk →
           </a>
         </div>
       )}

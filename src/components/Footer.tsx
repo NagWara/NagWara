@@ -1,38 +1,22 @@
 import { NagWaraIcon } from "./Logo";
 
 export default function Footer() {
-  const year = new Date().getFullYear();
-
   return (
-    <footer className="border-t border-white/[0.06] py-12 px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
-        <div className="flex items-center gap-3">
-          <NagWaraIcon className="h-6 w-auto text-[#D42B2B]" />
+    <footer className="border-t border-black/[0.06] py-10 px-6 bg-white">
+      <div className="max-w-[1200px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-5">
+        <div className="flex items-center gap-2.5">
+          <NagWaraIcon className="h-[22px] w-auto text-[#D42B2B]" />
           <div className="flex flex-col leading-none">
-            <span className="font-bold text-white/60 text-sm">NagWara</span>
-            <span className="text-[#D42B2B]/50 text-[7.5px] font-bold tracking-[0.18em] uppercase mt-0.5">
-              AI‑First Business
-            </span>
+            <span className="font-semibold text-[#111]/50 text-[13px]">NagWara</span>
+            <span className="text-[#D42B2B]/50 text-[7px] font-bold tracking-[0.2em] uppercase mt-[2px]">AI‑First Business</span>
           </div>
         </div>
 
-        <p className="text-white/20 text-xs">
-          © {year} NagWara SL. All rights reserved.
-        </p>
+        <p className="text-[#111]/25 text-xs">© {new Date().getFullYear()} NagWara SL</p>
 
-        <div className="flex items-center gap-6">
-          {[
-            { label: "Services", href: "#services" },
-            { label: "How We Work", href: "#how-we-work" },
-            { label: "Contact", href: "#contact" },
-          ].map((l) => (
-            <a
-              key={l.label}
-              href={l.href}
-              className="text-white/25 hover:text-white/55 text-xs transition-colors"
-            >
-              {l.label}
-            </a>
+        <div className="flex items-center gap-5">
+          {[["Services", "#services"], ["How We Work", "#how-we-work"], ["Contact", "#contact"]].map(([l, h]) => (
+            <a key={l} href={h} className="text-[#111]/30 hover:text-[#111]/60 text-xs transition-colors">{l}</a>
           ))}
         </div>
       </div>
