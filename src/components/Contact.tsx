@@ -1,9 +1,35 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 export default function Contact() {
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const formRef = useRef<HTMLFormElement>(null);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus("sending");
+
+    const data = new FormData(e.currentTarget);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.get("name"),
+          email: data.get("email"),
+          company: data.get("company"),
+          message: data.get("message"),
+        }),
+      });
+
+      if (!res.ok) throw new Error();
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+    }
+  }
 
   return (
     <section id="contact" className="py-24 px-6 bg-[#fafafa]">
@@ -29,41 +55,47 @@ export default function Contact() {
           </div>
 
           <div>
-            {sent ? (
+            {status === "sent" ? (
               <div className="rounded-xl border border-black/[0.07] bg-white p-12 text-center shadow-sm">
                 <div className="w-12 h-12 rounded-full border border-black/[0.1] bg-[#f5f5f5] flex items-center justify-center mx-auto mb-4 text-[#111] text-lg">✓</div>
                 <h3 className="text-[#111] font-semibold text-lg mb-1">Message received</h3>
                 <p className="text-[#111]/40 text-sm">We&apos;ll reach out within one business day.</p>
               </div>
             ) : (
-              <form onSubmit={(e) => { e.preventDefault(); setSent(true); }}
+              <form ref={formRef} onSubmit={handleSubmit}
                 className="rounded-xl border border-black/[0.07] bg-white p-8 flex flex-col gap-4 shadow-sm">
                 <div className="grid sm:grid-cols-2 gap-4">
-                  {[
-                    { label: "Name", type: "text", placeholder: "Jane Smith" },
-                    { label: "Email", type: "email", placeholder: "jane@company.com" },
-                  ].map((f) => (
-                    <div key={f.label} className="flex flex-col gap-1.5">
-                      <label className="text-xs text-[#111]/40 font-medium uppercase tracking-wider">{f.label}</label>
-                      <input type={f.type} required placeholder={f.placeholder}
-                        className="bg-[#f7f7f7] border border-black/[0.08] rounded-lg px-3.5 py-2.5 text-[#111] placeholder-black/20 text-sm focus:outline-none focus:border-[#D42B2B]/30 focus:bg-white transition-all" />
-                    </div>
-                  ))}
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-xs text-[#111]/40 font-medium uppercase tracking-wider">Name</label>
+                    <input name="name" type="text" required placeholder="Jane Smith"
+                      className="bg-[#f7f7f7] border border-black/[0.08] rounded-lg px-3.5 py-2.5 text-[#111] placeholder-black/20 text-sm focus:outline-none focus:border-[#D42B2B]/30 focus:bg-white transition-all" />
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-xs text-[#111]/40 font-medium uppercase tracking-wider">Email</label>
+                    <input name="email" type="email" required placeholder="jane@company.com"
+                      className="bg-[#f7f7f7] border border-black/[0.08] rounded-lg px-3.5 py-2.5 text-[#111] placeholder-black/20 text-sm focus:outline-none focus:border-[#D42B2B]/30 focus:bg-white transition-all" />
+                  </div>
                 </div>
                 <div className="flex flex-col gap-1.5">
                   <label className="text-xs text-[#111]/40 font-medium uppercase tracking-wider">Company</label>
-                  <input type="text" placeholder="Your company name"
+                  <input name="company" type="text" placeholder="Your company name"
                     className="bg-[#f7f7f7] border border-black/[0.08] rounded-lg px-3.5 py-2.5 text-[#111] placeholder-black/20 text-sm focus:outline-none focus:border-[#D42B2B]/30 focus:bg-white transition-all" />
                 </div>
                 <div className="flex flex-col gap-1.5">
                   <label className="text-xs text-[#111]/40 font-medium uppercase tracking-wider">What are you trying to achieve?</label>
-                  <textarea required rows={4} placeholder="Describe your current situation and what transformation you're looking for..."
+                  <textarea name="message" required rows={4} placeholder="Describe your current situation and what transformation you're looking for..."
                     className="bg-[#f7f7f7] border border-black/[0.08] rounded-lg px-3.5 py-2.5 text-[#111] placeholder-black/20 text-sm focus:outline-none focus:border-[#D42B2B]/30 focus:bg-white transition-all resize-none" />
                 </div>
-                <button type="submit"
-                  className="group flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-[#111] hover:bg-[#333] text-white font-semibold text-sm transition-all shadow-sm">
-                  Send message
-                  <span className="transition-transform group-hover:translate-x-0.5">→</span>
+
+                {status === "error" && (
+                  <p className="text-sm text-[#D42B2B]">Something went wrong — please try again or email us directly.</p>
+                )}
+
+                <button type="submit" disabled={status === "sending"}
+                  className="group flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-[#111] hover:bg-[#333] disabled:opacity-50 text-white font-semibold text-sm transition-all shadow-sm">
+                  {status === "sending" ? "Sending…" : (
+                    <>Send message <span className="transition-transform group-hover:translate-x-0.5">→</span></>
+                  )}
                 </button>
               </form>
             )}
